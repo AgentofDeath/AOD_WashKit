@@ -26,6 +26,9 @@ RegisterNetEvent('AOD:CleanThisBitch') --need to register our event to use when 
 AddEventHandler('AOD:CleanThisBitch', function() --same think but here comes the bulk of what we want
 	local playerPed = PlayerPedId() --get the player
 	local coords = GetEntityCoords(playerPed) --get the players position, this way we can figure out where the player is in relation to the car
+	if cleaningcar then
+		return
+	end
 	if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 5.0) then --first way to check for vehicle compared to our coords
 		local vehicle --declare our variable we are searching for
 
