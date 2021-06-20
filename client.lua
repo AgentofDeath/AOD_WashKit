@@ -1,5 +1,4 @@
 ESX	= nil
-local PlayerData		= {} --maybe I want to pull playerdata
 local cleaningcar = false
 
 Citizen.CreateThread(function()
@@ -9,26 +8,10 @@ Citizen.CreateThread(function()
 	end
 end)
 
-
-
-RegisterNetEvent('esx:playerLoaded') 
-AddEventHandler('esx:playerLoaded', function(xPlayer)
-	PlayerData = xPlayer --maybe used we dono yet
-end)
-
-RegisterNetEvent('esx:setJob')
-AddEventHandler('esx:setJob', function(job)
-  PlayerData.job = job --same shit
-end)
-
-
 RegisterNetEvent('AOD:CleanThisBitch') --need to register our event to use when the item is used
 AddEventHandler('AOD:CleanThisBitch', function() --same think but here comes the bulk of what we want
 	local playerPed = PlayerPedId() --get the player
 	local coords = GetEntityCoords(playerPed) --get the players position, this way we can figure out where the player is in relation to the car
-	if cleaningcar then
-		return
-	end
 	if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 5.0) then --first way to check for vehicle compared to our coords
 		local vehicle --declare our variable we are searching for
 
@@ -50,7 +33,7 @@ AddEventHandler('AOD:CleanThisBitch', function() --same think but here comes the
 					exports['mythic_notify']:DoLongHudText('inform', 'You washed your car! Nice job kid') --notify the player that cleaning is done. such wow
 					cleaningcar = false --we aint doing it anymore
 				end)
-				end
+			    end
 			end
 		end)
 
@@ -86,13 +69,13 @@ Citizen.CreateThread(function()
 			DisableControlAction(0, 71, true) -- Disable driving forward in vehicle
 			DisableControlAction(0, 72, true) -- Disable reversing in vehicle
 			DisableControlAction(2, 36, true) -- Disable going stealth
-            DisableControlAction(0, 200, true)  -- ESC
-            DisableControlAction(0, 322, true)  -- ESC
-            DisableControlAction(0, 191, true)  
+            		DisableControlAction(0, 200, true)  -- ESC
+            		DisableControlAction(0, 322, true)  -- ESC
+            		DisableControlAction(0, 191, true)  
 			DisableControlAction(0, 201, true) 
-            DisableControlAction(0, 215, true)  
+            		DisableControlAction(0, 215, true)  
 			DisableControlAction(0, 18, true) 
-            DisableControlAction(0, 176, true)  
+            		DisableControlAction(0, 176, true)  
 			DisableControlAction(0, 47, true)  -- Disable weapon
 			DisableControlAction(0, 264, true) -- Disable melee
 			DisableControlAction(0, 257, true) -- Disable melee
@@ -115,7 +98,7 @@ Citizen.CreateThread(function()
 			DisableControlAction(0, 166, true)  -- F5
 			DisableControlAction(0, 318, true)  -- F5 
 			DisableControlAction(0, 327, true)  -- F5 
-            DisableControlAction(0, 243, true)  -- 
+            		DisableControlAction(0, 243, true)  -- 
 		else
 			Citizen.Wait(500)
 		end
