@@ -6,7 +6,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) --server sided 
 
 ESX.RegisterUsableItem('washkit', function(source)
     local _source = source --declare source
-    local xPlayer  = ESX.GetPlayerFromId(source)--get the player using it
+    local xPlayer  = ESX.GetPlayerFromId(_source)--get the player using it
 
     xPlayer.removeInventoryItem('washkit', 1) --remove it on use
 
