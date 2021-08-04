@@ -24,21 +24,37 @@ AddEventHandler('AOD:CleanThisBitch', function() --same think but here comes the
 				cleaningcar = true --we are doing it
 				TaskStartScenarioInPlace(playerPed, 'WORLD_HUMAN_MAID_CLEAN', 0, true) -- start scenario
 				Citizen.CreateThread(function()
-					exports['progressBars']:startUI((20000), "Cleaning Car")-- export for the progress bar to show up
+					AOD.Progress('CleaningCar', 20000,  'You washed the car', false, false, {disableMovement = true, disableCarMovement = true, disableMouse = true, disableCombat = true,})
 					Citizen.Wait(20000) -- a pause or wait to match the same as the export for the progress bar
-
 					SetVehicleDirtLevel(vehicle, 0) -- make the car clean when its all done
-					ClearPedTasksImmediately(playerPed) --cancel everything you were doing
-					
-					exports['mythic_notify']:DoLongHudText('inform', 'You washed your car! Nice job kid') --notify the player that cleaning is done. such wow
+					ClearPedTasksImmediately(playerPed) --cancel everything you were doing	
+					Notify('You washed your car')
 					cleaningcar = false --we aint doing it anymore
 				end)
 			    end
 			end
 		end)
 
+Notify = function(text, timer)
+    if timer == nil then
+        timer = 5000
+    end
+    --exports['mythic_notify']:DoCustomHudText('vrm', text, timer)
+    -- exports.pNotify:SendNotification({layout = 'centerLeft', text = text, type = 'error', timeout = timer})
+    ESX.ShowNotification(text)
+end
 
-
+AOD.Progress = function(id, time, label, useWhileDead, canCancel, controlDisables)
+    exports['mythic_progbar']:Progress({
+        name = id,
+        duration = time,
+        label = label,
+        useWhileDead = useWhileDead,
+        canCancel = canCancel,
+        controlDisables = controlDisables
+    })
+    --exports['progressBars']:startUI((time), label)
+end
 
 Citizen.CreateThread(function()
 	while true do
