@@ -16,6 +16,7 @@ AddEventHandler('AOD:CleanThisBitch', function() --same think but here comes the
 		local vehicle --declare our variable we are searching for
 
 		if IsPedInAnyVehicle(playerPed, false) then
+			--if you don't want them to be able to wash the car in a vehicle do nothing here instead, but onesync has many issues with detection stuff
 			vehicle = GetVehiclePedIsIn(playerPed, false) --if they're inside the car (sometimes necessary for onesync related things not working correctly)
 		else
 			vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 5.0, 0, 71)-- last check.  At this point we either found a car or we are sure as fuck not near one
